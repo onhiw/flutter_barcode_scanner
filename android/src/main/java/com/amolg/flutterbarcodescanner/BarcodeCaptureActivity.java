@@ -108,10 +108,11 @@ public final class BarcodeCaptureActivity extends AppCompatActivity implements B
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         try {
-            requestWindowFeature( Window.FEATURE_NO_TITLE );
-
-            getWindow().setFlags( WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN );
+            // In Activity's onCreate() for instance
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                Window w = getWindow();
+                w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            }
             setContentView(R.layout.barcode_capture);
 
             String buttonText = "";
